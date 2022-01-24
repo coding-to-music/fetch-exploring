@@ -1,0 +1,39 @@
+//Generic GET request
+async function getRequest(url) {
+    const response = await fetch(url);
+    const result = await response.json(); 
+    return result; 
+}
+
+
+//Get User Info
+async function getFortniteUser(username) {
+
+    //Call the getRequest function for a User.  Note the backticks used instead of apostrophe's 
+    let userInfo = await getRequest(https://fortnite-public-api.theapinetwork.com/prod09/users/id?username=${username})
+
+    //Return the data of the requested user. 
+    return userInfo; 
+}
+
+
+async function updateUser(username) {
+
+    //call the getFortniteUser function passing along the username
+    let user = await getFortniteUser(username);
+
+    //Do stuff with the data that is returned.  You can see that you have access to all the data in the 'user' variable. 
+    console.log(user.uid); 
+    console.log(user.username); 
+    console.log(user.platforms[0]); 
+    console.log(user.seasons[0]);
+
+    //Update the div in your example 
+    $( "div.test" ).replaceWith(user.uid) 
+}
+
+//Call the updateUser function passing in different usernames
+updateUser('Ninja');
+updateUser('TimTheTatMan');
+updateUser('Tfue');
+updateUser('mattR47');
